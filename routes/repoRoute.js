@@ -3,6 +3,8 @@ const {
   postRepo,
   getAllRepos,
   getSingleRepo,
+  deleteRepo,
+  updateRepo,
 } = require('../controllers/repoController');
 
 // router
@@ -18,13 +20,9 @@ router.get('/:id', getSingleRepo);
 router.post('/', postRepo);
 
 // delete a repo
-router.delete('/:id', (req, res) => {
-  res.json({ message: 'delete a repo' });
-});
+router.delete('/:id', deleteRepo);
 
 // update a new repo
-router.patch('/:id', (req, res) => {
-  res.json({ message: 'patch a new repo' });
-});
+router.patch('/:id', updateRepo);
 
 module.exports = router;

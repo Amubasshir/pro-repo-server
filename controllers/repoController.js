@@ -38,11 +38,37 @@ const postRepo = async (req, res) => {
 };
 
 // delete a repo
+const deleteRepo = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'invalid id' });
+  }
+  const repo = await Repo.findOneAndDelete({ _id: id });
+  if (!repo) {
+    return res.status(404).json({ error: 'NO project found' });
+  }
+
+  res.status(200).json(repo);
+};
 
 // update a repo
+const updateRepo = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'invalid id' });
+  }
+  const repo = await Repo.findOneAndUpdate({ _id: id }, { ...req.body });
+  if (!repo) {
+    return res.status(404).json({ error: 'NO project found' });
+  }
+
+  res.status(200).json(repo);
+};
 
 module.exports = {
   postRepo,
   getAllRepos,
   getSingleRepo,
+  updateRepo,
+  deleteRepo,
 };
