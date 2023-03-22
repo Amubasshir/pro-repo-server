@@ -1,4 +1,5 @@
 const express = require('express');
+const Repo = require('../models/repoModel');
 
 // router
 const router = express.Router();
@@ -15,6 +16,11 @@ router.get('/:id', (req, res) => {
 
 // post a new repo
 router.post('/', (req, res) => {
+  const data = req.body;
+  try {
+    Repo;
+  } catch (err) {}
+
   res.json({ message: 'post a new repo' });
 });
 
