@@ -1,28 +1,21 @@
 const express = require('express');
-const Repo = require('../models/repoModel');
+const {
+  postRepo,
+  getAllRepos,
+  getSingleRepo,
+} = require('../controllers/repoController');
 
 // router
 const router = express.Router();
 
 // get all repos
-router.get('/', (req, res) => {
-  res.json({ message: 'get all repos' });
-});
+router.get('/', getAllRepos);
 
 // get a single repo
-router.get('/:id', (req, res) => {
-  res.json({ message: 'get a single repo' });
-});
+router.get('/:id', getSingleRepo);
 
 // post a new repo
-router.post('/', (req, res) => {
-  const data = req.body;
-  try {
-    Repo;
-  } catch (err) {}
-
-  res.json({ message: 'post a new repo' });
-});
+router.post('/', postRepo);
 
 // delete a repo
 router.delete('/:id', (req, res) => {
