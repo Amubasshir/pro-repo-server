@@ -4,7 +4,7 @@ const Repo = require('../models/repoModel');
 
 // get all repo
 getAllRepos = async (req, res) => {
-  const repos = await Repo.find({});
+  const repos = await Repo.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(repos);
 };
@@ -32,8 +32,8 @@ const postRepo = async (req, res) => {
     });
 
     res.status(200).json(repo);
-  } catch (err) {
-    res.status(400).json({ err: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
