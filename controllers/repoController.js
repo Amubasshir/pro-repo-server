@@ -25,10 +25,41 @@ const getSingleRepo = async (req, res) => {
 
 // post a new repo
 const postRepo = async (req, res) => {
-  const data = req.body;
+  const { title, subtitle, visibility, language, star, commit, pr } = req.body;
+
+  let emptyFields = [];
+  if (!title) {
+    emptyFields.push('title');
+  }
+  if (!subtitle) {
+    emptyFields.push('subtitle');
+  }
+  if (!visibility) {
+    emptyFields.push('visibility');
+  }
+  if (!language) {
+    emptyFields.push('language');
+  }
+
+  if (!star) {
+    emptyFields.push('star');
+  }
+  if (!commit) {
+    emptyFields.push('commit');
+  }
+  if (!pr) {
+    emptyFields.push('pr ');
+  }
+
+  if (emptyFields.length > 0) {
+    return res
+      .statue(400)
+      .json({ error: 'please fill in al fields', emptyFields });
+  }
+
   try {
     const repo = await Repo.create({
-      ...data,
+      ...req.body,
     });
 
     res.status(200).json(repo);
