@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const repoRoutes = require('./routes/repoRoute');
+const userRoutes = require('./routes/userRoute');
 
 // app
 const app = express();
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/api/repos', repoRoutes);
+app.use('/api/user', userRoutes);
 
 // mongodb
 mongoose
