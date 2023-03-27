@@ -7,8 +7,12 @@ const {
   updateRepo,
 } = require('../controllers/repoController');
 
+const requireAuth = require('../middlewares/requireAuth');
+
 // router
 const router = express.Router();
+
+router.use(requireAuth);
 
 // get all repos
 router.get('/', getAllRepos);

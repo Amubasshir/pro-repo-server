@@ -33,6 +33,10 @@ const repoSchema = new Schema(
       type: 'number',
       required: true,
     },
+    user_id: {
+      type: 'String',
+      required: true,
+    },
   },
   {
     timestamps: true,
