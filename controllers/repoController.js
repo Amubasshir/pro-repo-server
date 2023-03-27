@@ -4,7 +4,8 @@ const Repo = require('../models/repoModel');
 
 // get all repo
 const getAllRepos = async (req, res) => {
-  const repos = await Repo.find({}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+  const repos = await Repo.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(repos);
 };
@@ -58,8 +59,10 @@ const postRepo = async (req, res) => {
   }
 
   try {
+    const user_id = req.user._id;
     const repo = await Repo.create({
       ...req.body,
+      user_id,
     });
 
     res.status(200).json(repo);
